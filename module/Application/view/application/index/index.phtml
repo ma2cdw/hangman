@@ -1,0 +1,43 @@
+<div>
+    <div style="float:left">
+        <?php $imgNum = (string)( count( $this->failed_tries ) + 1 ); ?>
+        <img id="hanging-man" src="<?php echo $this->basePath( 'img/hang_' . $imgNum .'.gif' ); ?>" />
+    </div>
+    <div id="word" style="float:left">
+        <?php foreach( $this->word as $letter ): ?>
+        <div class="letter"
+             style="float:left;
+                    padding:2px;
+                    margin:2px;
+                    min-width: 14px;
+                    height: 20px;
+                    border-bottom: 1px solid black"><?php echo $letter ? $letter : ''; ?></div>
+        <?php endforeach; ?>
+    </div>
+</div>
+<div id="alphabet" style="clear: both">
+    <?php foreach( range( 'A', 'Z' ) as $letter ):
+            $color = 'black';
+            $class = 'alphabet';
+            if( in_array( $letter, $this->failed_tries ) )
+            {
+                $color = 'red';
+                $class .= ' tried';
+            }
+            else if( in_array( $letter, $this->tries ) )
+            {
+                $color = 'green';
+                $class .= ' tried';
+            }
+    ?>
+    <div class="<?php echo $class; ?>"
+         style="color:<?php echo $color; ?>;
+                float:left;
+                padding:2px;
+                margin:2px;
+                min-width: 14px;
+                height: 20px;
+                border-bottom: 1px solid <?php echo $color; ?>;
+                cursor: pointer"><?php echo $letter; ?></div>
+    <?php endforeach; ?>    
+</div>
